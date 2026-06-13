@@ -7,6 +7,7 @@
   --record-line: #ded8cc;
   --record-soft: #f4efe4;
   --record-accent: #9f4d38;
+  --record-selection: rgba(122, 38, 48, 0.24);
   --record-title-serif: "Noto Serif CJK KR", "Source Han Serif K", "Source Han Serif KR", "Noto Serif KR",
     "AppleMyungjo", "New York", Georgia, serif;
   --record-body-serif: "Noto Serif CJK KR", "Source Han Serif K", "Source Han Serif KR", "Noto Serif KR",
@@ -43,6 +44,11 @@ body {
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
+}
+
+::selection {
+  background: var(--record-selection);
+  color: var(--record-ink);
 }
 
 a {
