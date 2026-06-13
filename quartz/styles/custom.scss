@@ -501,6 +501,24 @@ pre {
   background: rgba(244, 239, 228, 0.52);
 }
 
+@media (min-width: 561px) and (max-width: 900px) {
+  .page-header {
+    width: 100%;
+    max-width: 650px;
+    padding: 0 64px !important;
+  }
+
+  .record-edge-nav {
+    left: 12px;
+    right: 12px;
+  }
+
+  .record-edge-nav-link {
+    width: 34px;
+    height: 34px;
+  }
+}
+
 @media (max-width: 560px) {
   html,
   body,
