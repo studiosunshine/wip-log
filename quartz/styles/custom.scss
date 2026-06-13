@@ -240,7 +240,8 @@ hr {
 }
 
 .record-about-back {
-  margin: 26px 0 -18px;
+  max-width: 650px;
+  margin: 26px auto -18px;
   font-family: var(--record-sans);
   font-size: 14px;
   font-weight: 600;
@@ -518,6 +519,7 @@ pre {
   .page[data-frame="full-width"] > #quartz-body,
   .center,
   article,
+  .record-about-back,
   .popover-hint {
     width: 100%;
     max-width: 100%;
