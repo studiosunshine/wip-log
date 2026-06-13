@@ -51,6 +51,10 @@ body {
   color: var(--record-ink);
 }
 
+.navigation-progress {
+  background: var(--record-accent) !important;
+}
+
 a {
   color: var(--record-accent);
   background: transparent;
