@@ -1,6 +1,12 @@
 ---
-title: studio sunshine
+title: Work in Progress Log
 ---
+"나만의 무언가를 만들고 싶어."
+
+회사 밖 생활자는 언제나 그게 고민입니다. 
+
+'나만의 무언가'를 만드는 과정을 기록합니다. 기록은 일주일 전의 기록을 공유합니다. 
+
 
 studio sunshine은 매일의 기록을 조용히 읽기 위한 공간입니다.
 
