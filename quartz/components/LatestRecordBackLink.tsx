@@ -48,7 +48,8 @@ const LatestRecordBackLink: QuartzComponent = ({ fileData, allFiles }: QuartzCom
   return (
     <p class="record-about-back">
       <a href={href} data-record-back-to-log>
-        &lt; back to log
+        <span class="record-about-back-mark" aria-hidden="true">&lt;</span>
+        <span class="record-about-back-text">back to log</span>
       </a>
     </p>
   )

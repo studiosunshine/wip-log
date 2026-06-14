@@ -7,6 +7,7 @@
   --record-line: #ded8cc;
   --record-soft: #f4efe4;
   --record-accent: #9f4d38;
+  --record-measure: 520px;
   --record-selection: rgba(122, 38, 48, 0.24);
   --record-title-serif: "Noto Serif CJK KR", "Source Han Serif K", "Source Han Serif KR", "Noto Serif KR",
     "AppleMyungjo", "New York", Georgia, serif;
@@ -103,7 +104,7 @@ a.internal {
 .center,
 article,
 .popover-hint {
-  max-width: 650px;
+  max-width: var(--record-measure);
   min-width: 0;
   margin-right: auto;
   margin-left: auto;
@@ -111,7 +112,7 @@ article,
 
 .page-header {
   position: relative;
-  max-width: 650px;
+  max-width: var(--record-measure);
   margin: 0 auto 54px !important;
   padding: 0 !important;
 }
@@ -121,18 +122,22 @@ article {
   font-family: var(--record-body-serif);
   font-size: 18.5px;
   font-weight: 400;
-  line-height: 2.05;
+  line-height: 1.65;
   letter-spacing: 0;
   word-break: keep-all;
+  text-align: justify;
+  text-align-last: left;
 }
 
 article p {
   color: var(--record-ink);
-  margin: 0 0 31px;
+  margin: 0 0 25px;
   font-family: var(--record-body-serif);
   font-size: 18.5px;
   font-weight: 400;
-  line-height: 2.05;
+  line-height: 1.65;
+  text-align: justify;
+  text-align-last: left;
 }
 
 article p:last-child {
@@ -142,22 +147,27 @@ article p:last-child {
 article li {
   color: var(--record-ink);
   font-family: var(--record-body-serif);
-  line-height: 2.05;
+  line-height: 1.65;
+  text-align: justify;
+  text-align-last: left;
 }
 
 article a {
-  color: var(--record-accent);
+  color: var(--record-ink);
   background: transparent !important;
   border-radius: 0 !important;
   box-shadow: none !important;
   padding: 0 !important;
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.24em;
+  transition: color 160ms ease;
 }
 
 article a:hover,
 article a:focus-visible {
+  color: var(--record-accent);
   outline: none;
-  text-decoration: underline;
 }
 
 article h1,
@@ -226,7 +236,7 @@ h6[id] > a[href^="#"] {
 }
 
 hr {
-  width: min(100%, 620px);
+  width: min(100%, calc(var(--record-measure) - 20px));
   height: 1px;
   margin: 72px auto 48px;
   border: 0;
@@ -265,7 +275,7 @@ hr {
 }
 
 .record-about-back {
-  max-width: 650px;
+  max-width: var(--record-measure);
   margin: 26px auto -18px;
   font-family: var(--record-sans);
   font-size: 14px;
@@ -280,8 +290,21 @@ hr {
   border-radius: 0 !important;
   box-shadow: none !important;
   padding: 0 !important;
+  font-weight: 300;
   text-decoration: none;
-  transition: color 160ms ease, transform 160ms ease;
+  transition: color 160ms ease;
+}
+
+.record-about-back-mark {
+  display: inline-block;
+  margin-right: 0.28em;
+  text-decoration: none;
+}
+
+.record-about-back-text {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.24em;
 }
 
 .record-about-back a:hover,
@@ -290,10 +313,19 @@ hr {
   outline: none;
 }
 
+.record-about-back a:hover .record-about-back-text,
+.record-about-back a:focus-visible .record-about-back-text {
+  text-decoration: underline;
+}
+
 .latest-record-redirect {
-  max-width: 650px;
+  max-width: var(--record-measure);
   margin: 120px auto 0;
   text-align: center;
+}
+
+.latest-record-redirect.is-hidden {
+  display: none;
 }
 
 .latest-record-redirect p {
@@ -538,7 +570,7 @@ a.record-calendar-day:focus-visible {
 }
 
 .record-month-index {
-  max-width: 650px;
+  max-width: var(--record-measure);
   margin: 8px auto 0;
 }
 
@@ -660,11 +692,13 @@ blockquote.callout li {
   font-family: var(--record-body-serif);
   font-size: 17.5px;
   font-weight: 400;
-  line-height: 1.95;
+  line-height: 1.62;
+  text-align: justify;
+  text-align-last: left;
 }
 
 blockquote.callout p {
-  margin: 0 0 22px;
+  margin: 0 0 18px;
 }
 
 blockquote.callout a:hover,
@@ -688,7 +722,7 @@ pre {
 @media (min-width: 561px) and (max-width: 900px) {
   .page-header {
     width: 100%;
-    max-width: 650px;
+    max-width: var(--record-measure);
     padding: 0 64px !important;
   }
 
@@ -747,13 +781,13 @@ pre {
 
   article {
     font-size: 17.5px;
-    line-height: 2;
+    line-height: 1.65;
   }
 
   article p {
     font-size: 17.5px;
-    line-height: 2;
-    margin-bottom: 27px;
+    line-height: 1.65;
+    margin-bottom: 22px;
   }
 
   hr {

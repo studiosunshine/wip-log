@@ -50,15 +50,17 @@ const LatestRecordRedirect: QuartzComponent = ({ fileData, allFiles }: QuartzCom
   const title = latest.page.frontmatter?.title ?? latest.date.key
 
   return (
-    <article class="latest-record-redirect">
-      <p>가장 최근 기록으로 이동합니다.</p>
-      <a href={href}>{title}</a>
+    <>
       <script
         dangerouslySetInnerHTML={{
           __html: `window.location.replace(${JSON.stringify(href)});`,
         }}
       />
-    </article>
+      <article class="latest-record-redirect is-hidden">
+        <p>가장 최근 기록으로 이동합니다.</p>
+        <a href={href}>{title}</a>
+      </article>
+    </>
   )
 }
 

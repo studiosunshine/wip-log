@@ -45,6 +45,15 @@ export const FullWidthFrame: PageFrame = {
 
     return (
       <>
+        {isIndex ? (
+          <>
+            <div class="center full-width is-index-redirect">
+              <LatestRecordRedirect {...componentData} />
+            </div>
+            {Footer && <Footer {...componentData} />}
+          </>
+        ) : (
+          <>
         <div class="center full-width">
           <div class="page-header">
             <Header {...componentData}>
@@ -64,9 +73,6 @@ export const FullWidthFrame: PageFrame = {
               </>
             )}
           </div>
-          {isIndex ? (
-            <LatestRecordRedirect {...componentData} />
-          ) : (
             <>
               <Content {...componentData} />
               <RecordMonthIndex {...componentData} />
@@ -82,9 +88,10 @@ export const FullWidthFrame: PageFrame = {
                 ⓒ 2026 <a href={aboutHref} data-record-about-link>studio sunshine</a>. All rights reserved.
               </p>
             </>
-          )}
         </div>
         {Footer && <Footer {...componentData} />}
+          </>
+        )}
       </>
     )
   },
