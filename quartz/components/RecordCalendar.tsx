@@ -146,14 +146,14 @@ export default function RecordCalendar(): QuartzComponent {
         <div class="record-calendar-nav">
           {previousMonthHref ? (
             <a
-              class="record-calendar-month-link"
+              class="record-calendar-month-link is-previous"
               href={previousMonthHref}
               aria-label={`${previousMonthKey} 기록으로 이동`}
             >
               ◂
             </a>
           ) : (
-            <span class="record-calendar-month-link is-disabled" aria-hidden="true">
+            <span class="record-calendar-month-link is-previous is-disabled" aria-hidden="true">
               ◂
             </span>
           )}
@@ -163,11 +163,15 @@ export default function RecordCalendar(): QuartzComponent {
             </a>
           </h2>
           {nextMonthHref ? (
-            <a class="record-calendar-month-link" href={nextMonthHref} aria-label={`${nextMonthKey} 기록으로 이동`}>
+            <a
+              class="record-calendar-month-link is-next"
+              href={nextMonthHref}
+              aria-label={`${nextMonthKey} 기록으로 이동`}
+            >
               ▸
             </a>
           ) : (
-            <span class="record-calendar-month-link is-disabled" aria-hidden="true">
+            <span class="record-calendar-month-link is-next is-disabled" aria-hidden="true">
               ▸
             </span>
           )}

@@ -377,7 +377,7 @@ a.record-edge-nav-link:focus-visible {
 }
 
 .record-edge-nav-link.is-disabled {
-  opacity: 0;
+  opacity: 0.22;
   pointer-events: none;
 }
 
@@ -410,24 +410,46 @@ a.record-edge-nav-link:focus-visible {
   place-items: center;
   width: 34px;
   height: 34px;
-  border-radius: 999px;
+  position: relative;
+  border-radius: 0;
   color: var(--record-muted);
-  font-size: 18px;
+  font-size: 0;
   line-height: 1;
   text-decoration: none;
-  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+  transition: color 160ms ease, opacity 160ms ease, transform 160ms ease;
+}
+
+.record-calendar-month-link::after {
+  position: absolute;
+  top: 50%;
+  right: 11px;
+  width: 10px;
+  height: 10px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  content: "";
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.record-calendar-month-link.is-previous::after {
+  right: auto;
+  left: 11px;
+  transform: translateY(-50%) rotate(225deg);
 }
 
 a.record-calendar-month-link:hover,
 a.record-calendar-month-link:focus-visible {
-  background: var(--record-soft);
   color: var(--record-accent);
   outline: none;
   transform: translateY(-1px);
 }
 
 .record-calendar-month-link.is-disabled {
-  opacity: 0.24;
+  opacity: 0.22;
+}
+
+.record-calendar-month-link.is-disabled::after {
+  border-color: currentColor;
 }
 
 .record-calendar-month-title {
@@ -480,7 +502,7 @@ a.record-calendar-month-link:focus-visible {
   font-weight: 300;
   line-height: 1;
   text-decoration: none;
-  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+  transition: color 160ms ease;
 }
 
 .record-calendar-day.is-empty {
@@ -501,10 +523,9 @@ a.record-calendar-month-link:focus-visible {
 
 a.record-calendar-day:hover,
 a.record-calendar-day:focus-visible {
-  background: var(--record-soft);
+  background: transparent;
   color: var(--record-accent);
   outline: none;
-  transform: translateY(-1px);
 }
 
 .record-calendar-day.is-current {
@@ -719,7 +740,17 @@ pre {
   .record-calendar-month-link {
     width: 28px;
     height: 28px;
-    font-size: 14px;
+  }
+
+  .record-calendar-month-link::after {
+    right: 9px;
+    width: 9px;
+    height: 9px;
+  }
+
+  .record-calendar-month-link.is-previous::after {
+    right: auto;
+    left: 9px;
   }
 
   .record-calendar-weekdays {
