@@ -686,19 +686,44 @@ blockquote.callout .callout-content-inner > :last-child {
   margin-bottom: 0;
 }
 
+blockquote.callout ul,
+blockquote.callout ol {
+  margin: 0 0 18px;
+  padding-left: 1.35em;
+}
+
+blockquote.callout ul ul,
+blockquote.callout ul ol,
+blockquote.callout ol ul,
+blockquote.callout ol ol {
+  margin-top: 8px;
+}
+
 blockquote.callout p,
 blockquote.callout li {
   color: var(--record-ink);
   font-family: var(--record-body-serif);
   font-size: 17.5px;
   font-weight: 400;
-  line-height: 1.62;
-  text-align: justify;
-  text-align-last: left;
+  line-height: 1.72;
+  text-align: left;
+  text-align-last: auto;
+}
+
+blockquote.callout li {
+  margin: 0 0 8px;
+  padding-left: 0.12em;
 }
 
 blockquote.callout p {
   margin: 0 0 18px;
+}
+
+blockquote.callout li:last-child,
+blockquote.callout p:last-child,
+blockquote.callout ul:last-child,
+blockquote.callout ol:last-child {
+  margin-bottom: 0;
 }
 
 blockquote.callout a:hover,
