@@ -83,6 +83,56 @@ async function joinScripts(scripts: string[]): Promise<string> {
 
 function addGlobalPageResources(ctx: BuildCtx, componentResources: ComponentResources) {
   const cfg = ctx.cfg.configuration
+  componentResources.afterDOMLoaded.push(`
+    const recordBackStorageKey = "record:last-log-page";
+
+    function recordPathFromUrl(value) {
+      if (!value) return undefined;
+
+      try {
+        const url = new URL(value, window.location.href);
+        if (url.origin !== window.location.origin) return undefined;
+        if (url.pathname === window.location.pathname) return undefined;
+        return url.pathname + url.search + url.hash;
+      } catch {
+        return undefined;
+      }
+    }
+
+    function rememberCurrentLogPage() {
+      const path = window.location.pathname + window.location.search + window.location.hash;
+      if (window.location.pathname.endsWith("/studio-sunshine")) return;
+      if (window.location.pathname.endsWith("/studio-sunshine/")) return;
+      sessionStorage.setItem(recordBackStorageKey, path);
+    }
+
+    document.addEventListener(
+      "click",
+      (event) => {
+        const target = event.target instanceof Element ? event.target.closest("a") : null;
+        if (!target) return;
+
+        if (target.matches("[data-record-about-link]")) {
+          rememberCurrentLogPage();
+          return;
+        }
+
+        if (target.matches("[data-record-back-to-log]")) {
+          const params = new URLSearchParams(window.location.search);
+          const storedPath = sessionStorage.getItem(recordBackStorageKey);
+          const targetPath =
+            recordPathFromUrl(params.get("from")) ??
+            recordPathFromUrl(storedPath) ??
+            recordPathFromUrl(document.referrer);
+
+          if (!targetPath) return;
+          event.preventDefault();
+          window.spaNavigate ? window.spaNavigate(new URL(targetPath, window.location.href), false) : window.location.assign(targetPath);
+        }
+      },
+      true,
+    );
+  `)
 
   // popovers
   if (cfg.enablePopovers) {

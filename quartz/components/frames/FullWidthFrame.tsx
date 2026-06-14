@@ -1,7 +1,10 @@
 import { PageFrame, PageFrameProps } from "./types"
+import { FullSlug, resolveRelative } from "../../util/path"
 import HeaderConstructor from "../Header"
 import LatestRecordRedirectConstructor from "../LatestRecordRedirect"
 import LatestRecordBackLinkConstructor from "../LatestRecordBackLink"
+import RecordMonthIndexConstructor from "../RecordMonthIndex"
+import RecordMonthPagerConstructor from "../RecordMonthPager"
 import RecordCalendarConstructor from "../RecordCalendar"
 import RecordPagerConstructor from "../RecordPager"
 
@@ -9,6 +12,8 @@ const Header = HeaderConstructor()
 const LatestRecordRedirect = LatestRecordRedirectConstructor({})
 const LatestRecordBackLink = LatestRecordBackLinkConstructor({})
 const RecordCalendar = RecordCalendarConstructor()
+const RecordMonthIndex = RecordMonthIndexConstructor()
+const RecordMonthPager = RecordMonthPagerConstructor()
 const RecordPager = RecordPagerConstructor({})
 
 /**
@@ -30,6 +35,13 @@ export const FullWidthFrame: PageFrame = {
     footer: Footer,
   }: PageFrameProps) {
     const isIndex = componentData.fileData.slug === "index"
+    const isAbout = componentData.fileData.slug === "studio-sunshine"
+    const currentSlug = componentData.fileData.slug
+    const aboutBaseHref = currentSlug ? resolveRelative(currentSlug, "studio-sunshine" as FullSlug) : "./studio-sunshine"
+    const aboutHref =
+      currentSlug && !isIndex && !isAbout
+        ? `${aboutBaseHref}?from=${encodeURIComponent(resolveRelative("studio-sunshine" as FullSlug, currentSlug))}`
+        : aboutBaseHref
 
     return (
       <>
@@ -45,13 +57,19 @@ export const FullWidthFrame: PageFrame = {
                 <BodyComponent {...componentData} />
               ))}
             </div>
-            {!isIndex && <RecordPager {...componentData} />}
+            {!isIndex && (
+              <>
+                <RecordPager {...componentData} />
+                <RecordMonthPager {...componentData} />
+              </>
+            )}
           </div>
           {isIndex ? (
             <LatestRecordRedirect {...componentData} />
           ) : (
             <>
               <Content {...componentData} />
+              <RecordMonthIndex {...componentData} />
               <LatestRecordBackLink {...componentData} />
               <hr />
               <div class="page-footer">
@@ -61,7 +79,7 @@ export const FullWidthFrame: PageFrame = {
                 ))}
               </div>
               <p class="record-copyright">
-                ⓒ 2026 <a href="./studio-sunshine">studio sunshine</a>. All rights reserved.
+                ⓒ 2026 <a href={aboutHref} data-record-about-link>studio sunshine</a>. All rights reserved.
               </p>
             </>
           )}

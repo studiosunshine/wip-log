@@ -415,6 +415,23 @@ a.record-calendar-month-link:focus-visible {
   opacity: 0.24;
 }
 
+.record-calendar-month-title {
+  color: inherit;
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.record-calendar-month-title:hover,
+.record-calendar-month-title:focus-visible {
+  color: var(--record-accent);
+  outline: none;
+  text-decoration: none;
+}
+
 .record-calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, minmax(30px, 1fr));
@@ -482,6 +499,65 @@ a.record-calendar-day:focus-visible {
 
 .record-calendar-day.is-current.has-record::before {
   top: -1px;
+}
+
+.record-month-index {
+  max-width: 650px;
+  margin: 8px auto 0;
+}
+
+.record-month-list {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.record-month-list li {
+  display: grid;
+  grid-template-columns: 118px minmax(0, 1fr);
+  gap: 22px;
+  align-items: baseline;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(222, 216, 204, 0.72);
+}
+
+.record-month-list li:first-child {
+  border-top: 1px solid rgba(222, 216, 204, 0.72);
+}
+
+.record-month-date {
+  color: var(--record-muted);
+  font-family: var(--record-sans);
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.record-month-link {
+  color: var(--record-ink);
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  font-family: var(--record-body-serif);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.7;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.record-month-link:hover,
+.record-month-link:focus-visible {
+  color: var(--record-accent);
+  outline: none;
+}
+
+.record-month-empty {
+  color: var(--record-muted);
+  text-align: center;
 }
 
 blockquote {
@@ -594,6 +670,25 @@ pre {
   .record-calendar {
     width: 100%;
     max-width: 314px;
+  }
+
+  .record-month-index {
+    width: 100%;
+  }
+
+  .record-month-list li {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 16px 0;
+  }
+
+  .record-month-date {
+    font-size: 12px;
+  }
+
+  .record-month-link {
+    font-size: 17px;
+    line-height: 1.75;
   }
 
   .record-calendar-nav {

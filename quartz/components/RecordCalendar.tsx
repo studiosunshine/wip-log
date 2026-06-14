@@ -106,6 +106,8 @@ export default function RecordCalendar(): QuartzComponent {
     const nextMonthHref = nextMonthEntry ? resolveRelative(fileData.slug!, nextMonthEntry.page.slug! as FullSlug) : undefined
 
     const firstWeekday = new Date(Date.UTC(currentDate.year, currentDate.month - 1, 1)).getUTCDay()
+    const monthPageSlug = currentDate.monthKey as FullSlug
+    const monthPageHref = resolveRelative(fileData.slug!, monthPageSlug)
     const daysInMonth = new Date(Date.UTC(currentDate.year, currentDate.month, 0)).getUTCDate()
     const cells = []
 
@@ -155,7 +157,11 @@ export default function RecordCalendar(): QuartzComponent {
               ◂
             </span>
           )}
-          <h2>{formatMonth(currentDate.year, currentDate.month)}</h2>
+          <h2>
+            <a class="record-calendar-month-title" href={monthPageHref} aria-label={`${formatMonth(currentDate.year, currentDate.month)} 기록 목록`}>
+              {formatMonth(currentDate.year, currentDate.month)}
+            </a>
+          </h2>
           {nextMonthHref ? (
             <a class="record-calendar-month-link" href={nextMonthHref} aria-label={`${nextMonthKey} 기록으로 이동`}>
               ▸
