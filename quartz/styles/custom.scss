@@ -145,6 +145,21 @@ article li {
   line-height: 2.05;
 }
 
+article a {
+  color: var(--record-accent);
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  text-decoration: none;
+}
+
+article a:hover,
+article a:focus-visible {
+  outline: none;
+  text-decoration: underline;
+}
+
 article h1,
 article h2,
 article h3,
