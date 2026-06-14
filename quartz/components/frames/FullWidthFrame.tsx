@@ -9,12 +9,12 @@ import RecordCalendarConstructor from "../RecordCalendar"
 import RecordPagerConstructor from "../RecordPager"
 
 const Header = HeaderConstructor()
-const LatestRecordRedirect = LatestRecordRedirectConstructor({})
-const LatestRecordBackLink = LatestRecordBackLinkConstructor({})
+const LatestRecordRedirect = LatestRecordRedirectConstructor()
+const LatestRecordBackLink = LatestRecordBackLinkConstructor()
 const RecordCalendar = RecordCalendarConstructor()
 const RecordMonthIndex = RecordMonthIndexConstructor()
 const RecordMonthPager = RecordMonthPagerConstructor()
-const RecordPager = RecordPagerConstructor({})
+const RecordPager = RecordPagerConstructor()
 
 /**
  * Full-width page frame — no sidebars. The center content area spans the
@@ -37,7 +37,9 @@ export const FullWidthFrame: PageFrame = {
     const isIndex = componentData.fileData.slug === "index"
     const isAbout = componentData.fileData.slug === "studio-sunshine"
     const currentSlug = componentData.fileData.slug
-    const aboutBaseHref = currentSlug ? resolveRelative(currentSlug, "studio-sunshine" as FullSlug) : "./studio-sunshine"
+    const aboutBaseHref = currentSlug
+      ? resolveRelative(currentSlug, "studio-sunshine" as FullSlug)
+      : "./studio-sunshine"
     const aboutHref =
       currentSlug && !isIndex && !isAbout
         ? `${aboutBaseHref}?from=${encodeURIComponent(resolveRelative("studio-sunshine" as FullSlug, currentSlug))}`
@@ -54,42 +56,46 @@ export const FullWidthFrame: PageFrame = {
           </>
         ) : (
           <>
-        <div class="center full-width">
-          <div class="page-header">
-            <Header {...componentData}>
-              {header.map((HeaderComponent) => (
-                <HeaderComponent {...componentData} />
-              ))}
-            </Header>
-            <div class="popover-hint">
-              {beforeBody.map((BodyComponent) => (
-                <BodyComponent {...componentData} />
-              ))}
-            </div>
-            {!isIndex && (
-              <>
-                <RecordPager {...componentData} />
-                <RecordMonthPager {...componentData} />
-              </>
-            )}
-          </div>
-            <>
-              <Content {...componentData} />
-              <RecordMonthIndex {...componentData} />
-              <LatestRecordBackLink {...componentData} />
-              <hr />
-              <div class="page-footer">
-                <RecordCalendar {...componentData} />
-                {afterBody.map((BodyComponent) => (
-                  <BodyComponent {...componentData} />
-                ))}
+            <div class="center full-width">
+              <div class="page-header">
+                <Header {...componentData}>
+                  {header.map((HeaderComponent) => (
+                    <HeaderComponent {...componentData} />
+                  ))}
+                </Header>
+                <div class="popover-hint">
+                  {beforeBody.map((BodyComponent) => (
+                    <BodyComponent {...componentData} />
+                  ))}
+                </div>
+                {!isIndex && (
+                  <>
+                    <RecordPager {...componentData} />
+                    <RecordMonthPager {...componentData} />
+                  </>
+                )}
               </div>
-              <p class="record-copyright">
-                ⓒ 2026 <a href={aboutHref} data-record-about-link>studio sunshine</a>. All rights reserved.
-              </p>
-            </>
-        </div>
-        {Footer && <Footer {...componentData} />}
+              <>
+                <Content {...componentData} />
+                <RecordMonthIndex {...componentData} />
+                <LatestRecordBackLink {...componentData} />
+                <hr />
+                <div class="page-footer">
+                  <RecordCalendar {...componentData} />
+                  {afterBody.map((BodyComponent) => (
+                    <BodyComponent {...componentData} />
+                  ))}
+                </div>
+                <p class="record-copyright">
+                  ⓒ 2026{" "}
+                  <a href={aboutHref} data-record-about-link>
+                    studio sunshine
+                  </a>
+                  . All rights reserved.
+                </p>
+              </>
+            </div>
+            {Footer && <Footer {...componentData} />}
           </>
         )}
       </>

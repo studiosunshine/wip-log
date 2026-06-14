@@ -5,6 +5,9 @@ import { googleFontHref, googleFontSubsetHref } from "../util/theme"
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import { unescapeHTML } from "../util/escape"
 import { CustomOgImagesEmitterName } from "../../.quartz/plugins"
+
+const initialBackgroundColor = "#fffdf7"
+
 export default (() => {
   const Head: QuartzComponent = ({
     cfg,
@@ -45,6 +48,8 @@ export default (() => {
       <head>
         <title>{title}</title>
         <meta charSet="utf-8" />
+        <meta name="theme-color" content={initialBackgroundColor} />
+        <style>{`html,body,#quartz-root{background-color:${initialBackgroundColor};}`}</style>
         {coreStylesheet && <link rel="preload" href={coreStylesheet} as="style" />}
         {coreScript && coreScript.contentType === "external" && (
           <link rel="preload" href={coreScript.src} as="script" />
