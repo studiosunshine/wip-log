@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://studiosunshine.github.io/wip-log/sitemap.xml
