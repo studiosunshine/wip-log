@@ -15,9 +15,14 @@ configuration:
     fontOrigin: googleFonts
     cdnCaching: true
     typography:
-      header: Noto Serif KR
+      header: Noto Sans KR
       body: Noto Serif KR
       code: IBM Plex Mono
+      weights:
+        - 400
+        - 500
+        - 600
+        - 700
     colors:
       lightMode:
         light: "#FFFDF7"

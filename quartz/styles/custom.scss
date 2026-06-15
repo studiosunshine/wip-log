@@ -16,6 +16,9 @@
     "Noto Serif CJK KR", "Source Han Serif K", "Source Han Serif KR", "Noto Serif KR",
     "AppleMyungjo", Georgia, serif;
   --record-serif: var(--record-title-serif);
+  --record-title-sans:
+    "Noto Sans KR", "Noto Sans CJK KR", "Source Han Sans K", "Source Han Sans KR",
+    "Apple SD Gothic Neo", sans-serif;
   --record-sans: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
 }
 
@@ -184,22 +187,52 @@ article h3,
 .article-title,
 .page-title {
   color: var(--record-ink);
-  font-family: var(--record-title-serif);
-  font-weight: 600;
+  font-family: var(--record-title-sans);
+  font-weight: 500;
+  font-kerning: normal;
+  font-feature-settings:
+    "kern",
+    "palt";
   letter-spacing: 0;
 }
 
 article h1,
 .article-title {
   margin: 0 0 34px;
-  font-size: clamp(24px, 3.7vw, 35px);
-  line-height: 1.35;
+  font-size: 20px;
+  line-height: 1.45;
   text-align: center;
+  transform: scaleX(0.98);
+  transform-origin: center;
   word-break: keep-all;
 }
 
 .article-title {
   display: block;
+}
+
+.page-header:has(.record-header-date) .article-title {
+  margin-bottom: 8px;
+}
+
+.page-header:has(+ article.record-month-body) .article-title {
+  font-family: var(--record-serif);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0;
+  transform: none;
+}
+
+.record-header-date {
+  display: block;
+  margin: 0 auto;
+  color: var(--record-muted);
+  font-family: var(--record-sans);
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.7;
+  text-align: center;
 }
 
 article h2 {
@@ -443,7 +476,7 @@ a.record-edge-nav-link:focus-visible {
   font-size: 22px;
   font-weight: 400;
   line-height: 1.45;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
 }
 
 .record-calendar-nav {
@@ -640,10 +673,15 @@ a.record-calendar-day:focus-visible {
   border-radius: 0 !important;
   box-shadow: none !important;
   padding: 0 !important;
-  font-family: var(--record-body-serif);
-  font-size: 18px;
-  font-weight: 400;
+  font-family: var(--record-title-sans);
+  font-size: 16px;
+  font-weight: 500;
+  font-kerning: normal;
+  font-feature-settings:
+    "kern",
+    "palt";
   line-height: 1.7;
+  letter-spacing: 0;
   text-decoration: none;
   transition: color 160ms ease;
 }
@@ -857,8 +895,8 @@ pre {
 
   article h1,
   .article-title {
-    font-size: 24px;
-    line-height: 1.35;
+    font-size: 20px;
+    line-height: 1.45;
   }
 
   article {
@@ -916,7 +954,7 @@ pre {
   }
 
   .record-month-link {
-    font-size: 17px;
+    font-size: 15px;
     line-height: 1.75;
   }
 

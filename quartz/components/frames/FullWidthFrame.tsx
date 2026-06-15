@@ -6,12 +6,14 @@ import LatestRecordBackLinkConstructor from "../LatestRecordBackLink"
 import RecordMonthIndexConstructor from "../RecordMonthIndex"
 import RecordMonthPagerConstructor from "../RecordMonthPager"
 import RecordCalendarConstructor from "../RecordCalendar"
+import RecordHeaderDateConstructor from "../RecordHeaderDate"
 import RecordPagerConstructor from "../RecordPager"
 
 const Header = HeaderConstructor()
 const LatestRecordRedirect = LatestRecordRedirectConstructor()
 const LatestRecordBackLink = LatestRecordBackLinkConstructor()
 const RecordCalendar = RecordCalendarConstructor()
+const RecordHeaderDate = RecordHeaderDateConstructor()
 const RecordMonthIndex = RecordMonthIndexConstructor()
 const RecordMonthPager = RecordMonthPagerConstructor()
 const RecordPager = RecordPagerConstructor()
@@ -68,6 +70,7 @@ export const FullWidthFrame: PageFrame = {
                     <BodyComponent {...componentData} />
                   ))}
                 </div>
+                <RecordHeaderDate {...componentData} />
                 {!isIndex && (
                   <>
                     <RecordPager {...componentData} />
