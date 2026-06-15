@@ -604,15 +604,26 @@ a.record-calendar-day:focus-visible {
 
 .record-month-list li {
   display: grid;
-  grid-template-columns: 118px minmax(0, 1fr);
-  gap: 22px;
-  align-items: baseline;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
   padding: 18px 0;
   border-bottom: 1px solid rgba(222, 216, 204, 0.72);
 }
 
+.record-month-list li.has-thumbnail {
+  grid-template-columns: minmax(0, 1fr) 82px;
+}
+
 .record-month-list li:first-child {
   border-top: 1px solid rgba(222, 216, 204, 0.72);
+}
+
+.record-month-copy {
+  display: grid;
+  grid-template-columns: 118px minmax(0, 1fr);
+  gap: 22px;
+  align-items: baseline;
 }
 
 .record-month-date {
@@ -641,6 +652,32 @@ a.record-calendar-day:focus-visible {
 .record-month-link:focus-visible {
   color: var(--record-accent);
   outline: none;
+}
+
+.record-month-thumbnail {
+  display: block;
+  width: 82px;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: transparent !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.record-month-thumbnail img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border-radius: inherit;
+  object-fit: cover;
+}
+
+.record-month-thumbnail:hover,
+.record-month-thumbnail:focus-visible {
+  outline: 1px solid rgba(159, 77, 56, 0.36);
+  outline-offset: 3px;
 }
 
 .record-month-empty {
@@ -861,8 +898,17 @@ pre {
 
   .record-month-list li {
     grid-template-columns: 1fr;
-    gap: 4px;
+    gap: 14px;
     padding: 16px 0;
+  }
+
+  .record-month-list li.has-thumbnail {
+    grid-template-columns: minmax(0, 1fr) 72px;
+  }
+
+  .record-month-copy {
+    grid-template-columns: 1fr;
+    gap: 4px;
   }
 
   .record-month-date {
@@ -872,6 +918,10 @@ pre {
   .record-month-link {
     font-size: 17px;
     line-height: 1.75;
+  }
+
+  .record-month-thumbnail {
+    width: 72px;
   }
 
   .record-calendar-nav {

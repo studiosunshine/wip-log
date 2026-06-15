@@ -177,6 +177,12 @@ function populateVirtualPageHtmlAst(
   }
 }
 
+function populateContentHtmlAst(content: ProcessedContent[]) {
+  for (const [tree, file] of content) {
+    file.data.htmlAst = tree
+  }
+}
+
 export const PageTypeDispatcher: QuartzEmitterPlugin<Partial<DispatcherOptions>> = (userOpts) => {
   const defaults = userOpts?.defaults ?? {}
   const byPageType = userOpts?.byPageType ?? {}
@@ -190,6 +196,7 @@ export const PageTypeDispatcher: QuartzEmitterPlugin<Partial<DispatcherOptions>>
     async *emit(ctx, content, resources) {
       const pageTypes = [...getPageTypes(ctx)].sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0))
       const cfg = ctx.cfg.configuration
+      populateContentHtmlAst(content)
       const allFiles = content.map((c) => c[1].data)
 
       // Collect tree transforms from all page type plugins
@@ -280,6 +287,7 @@ export const PageTypeDispatcher: QuartzEmitterPlugin<Partial<DispatcherOptions>>
     async *partialEmit(ctx, content, resources, changeEvents) {
       const pageTypes = [...getPageTypes(ctx)].sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0))
       const cfg = ctx.cfg.configuration
+      populateContentHtmlAst(content)
       const allFiles = content.map((c) => c[1].data)
 
       // Collect tree transforms from all page type plugins
