@@ -759,10 +759,15 @@ blockquote.callout .callout-title-inner,
 blockquote.callout .callout-title-inner > p {
   margin: 0;
   color: var(--record-ink);
-  font-family: var(--record-body-serif);
+  font-family: var(--record-title-sans);
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
+  font-kerning: normal;
+  font-feature-settings:
+    "kern",
+    "palt";
   line-height: 1.7;
+  letter-spacing: 0;
 }
 
 blockquote.callout .callout-content {
