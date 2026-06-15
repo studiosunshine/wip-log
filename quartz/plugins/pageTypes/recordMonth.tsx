@@ -58,7 +58,11 @@ function formatMonthTitle(monthKey: string): string {
 }
 
 function getRecordDate(page: QuartzPluginData): RecordDate | undefined {
-  return parseRecordDate(page.frontmatter?.date) ?? parseRecordDate(page.slug) ?? parseRecordDate(page.filePath)
+  return (
+    parseRecordDate(page.frontmatter?.date) ??
+    parseRecordDate(page.slug) ??
+    parseRecordDate(page.filePath)
+  )
 }
 
 function getMonthKeyFromSlug(slug: string): string | undefined {

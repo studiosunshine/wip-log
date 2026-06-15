@@ -23,14 +23,17 @@ function parseDateKey(value: unknown): string | undefined {
 }
 
 function getRecordDateKey(page: QuartzPluginData): string | undefined {
-  return parseDateKey(page.frontmatter?.date) ?? parseDateKey(page.slug) ?? parseDateKey(page.filePath)
+  return (
+    parseDateKey(page.frontmatter?.date) ?? parseDateKey(page.slug) ?? parseDateKey(page.filePath)
+  )
 }
 
 function getRecordEntries(allFiles: QuartzPluginData[]): RecordEntry[] {
   return allFiles
     .map((page) => {
       const dateKey = getRecordDateKey(page)
-      if (!dateKey || !page.slug || page.slug === "index" || !page.frontmatter?.title) return undefined
+      if (!dateKey || !page.slug || page.slug === "index" || !page.frontmatter?.title)
+        return undefined
       return { dateKey, page }
     })
     .filter((entry): entry is RecordEntry => Boolean(entry))
@@ -50,8 +53,12 @@ const RecordPager: QuartzComponent = ({ fileData, allFiles }: QuartzComponentPro
 
   if (!previousRecord && !nextRecord) return null
 
-  const previousHref = previousRecord ? resolveRelative(fileData.slug, previousRecord.page.slug! as FullSlug) : undefined
-  const nextHref = nextRecord ? resolveRelative(fileData.slug, nextRecord.page.slug! as FullSlug) : undefined
+  const previousHref = previousRecord
+    ? resolveRelative(fileData.slug, previousRecord.page.slug! as FullSlug)
+    : undefined
+  const nextHref = nextRecord
+    ? resolveRelative(fileData.slug, nextRecord.page.slug! as FullSlug)
+    : undefined
 
   return (
     <nav class="record-edge-nav" aria-label="기록 이동">

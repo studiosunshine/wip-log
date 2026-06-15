@@ -72,7 +72,11 @@ function getRecordEntries(allFiles: QuartzPluginData[]): RecordEntry[] {
     .sort((a, b) => a.date.key.localeCompare(b.date.key))
 }
 
-function getMonthLink(records: RecordEntry[], monthKey: string, direction: "previous" | "next"): RecordEntry | undefined {
+function getMonthLink(
+  records: RecordEntry[],
+  monthKey: string,
+  direction: "previous" | "next",
+): RecordEntry | undefined {
   const entries = records.filter((entry) => entry.date.monthKey === monthKey)
   if (direction === "previous") return entries[entries.length - 1]
   return entries[0]
@@ -97,13 +101,19 @@ export default function RecordCalendar(): QuartzComponent {
     const currentMonthIndex = monthKeys.indexOf(currentDate.monthKey)
     const previousMonthKey = currentMonthIndex > 0 ? monthKeys[currentMonthIndex - 1] : undefined
     const nextMonthKey =
-      currentMonthIndex >= 0 && currentMonthIndex < monthKeys.length - 1 ? monthKeys[currentMonthIndex + 1] : undefined
-    const previousMonthEntry = previousMonthKey ? getMonthLink(records, previousMonthKey, "previous") : undefined
+      currentMonthIndex >= 0 && currentMonthIndex < monthKeys.length - 1
+        ? monthKeys[currentMonthIndex + 1]
+        : undefined
+    const previousMonthEntry = previousMonthKey
+      ? getMonthLink(records, previousMonthKey, "previous")
+      : undefined
     const nextMonthEntry = nextMonthKey ? getMonthLink(records, nextMonthKey, "next") : undefined
     const previousMonthHref = previousMonthEntry
       ? resolveRelative(fileData.slug!, previousMonthEntry.page.slug! as FullSlug)
       : undefined
-    const nextMonthHref = nextMonthEntry ? resolveRelative(fileData.slug!, nextMonthEntry.page.slug! as FullSlug) : undefined
+    const nextMonthHref = nextMonthEntry
+      ? resolveRelative(fileData.slug!, nextMonthEntry.page.slug! as FullSlug)
+      : undefined
 
     const firstWeekday = new Date(Date.UTC(currentDate.year, currentDate.month - 1, 1)).getUTCDay()
     const monthPageSlug = currentDate.monthKey as FullSlug
@@ -142,7 +152,10 @@ export default function RecordCalendar(): QuartzComponent {
     }
 
     return (
-      <section class="record-calendar" aria-label={`${formatMonth(currentDate.year, currentDate.month)} 기록 달력`}>
+      <section
+        class="record-calendar"
+        aria-label={`${formatMonth(currentDate.year, currentDate.month)} 기록 달력`}
+      >
         <div class="record-calendar-nav">
           {previousMonthHref ? (
             <a
@@ -158,7 +171,11 @@ export default function RecordCalendar(): QuartzComponent {
             </span>
           )}
           <h2>
-            <a class="record-calendar-month-title" href={monthPageHref} aria-label={`${formatMonth(currentDate.year, currentDate.month)} 기록 목록`}>
+            <a
+              class="record-calendar-month-title"
+              href={monthPageHref}
+              aria-label={`${formatMonth(currentDate.year, currentDate.month)} 기록 목록`}
+            >
               {formatMonth(currentDate.year, currentDate.month)}
             </a>
           </h2>

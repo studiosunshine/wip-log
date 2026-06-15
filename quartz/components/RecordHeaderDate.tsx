@@ -22,7 +22,9 @@ function formatDateLabel(dateKey: string): string {
 
 const RecordHeaderDate: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
   const dateKey =
-    parseDateKey(fileData.frontmatter?.date) ?? parseDateKey(fileData.slug) ?? parseDateKey(fileData.filePath)
+    parseDateKey(fileData.frontmatter?.date) ??
+    parseDateKey(fileData.slug) ??
+    parseDateKey(fileData.filePath)
 
   if (!dateKey || !fileData.slug || fileData.slug === "index") return null
 

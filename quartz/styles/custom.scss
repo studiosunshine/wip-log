@@ -190,9 +190,7 @@ article h3,
   font-family: var(--record-title-sans);
   font-weight: 500;
   font-kerning: normal;
-  font-feature-settings:
-    "kern",
-    "palt";
+  font-feature-settings: "kern", "palt";
   letter-spacing: 0;
 }
 
@@ -677,9 +675,7 @@ a.record-calendar-day:focus-visible {
   font-size: 16px;
   font-weight: 500;
   font-kerning: normal;
-  font-feature-settings:
-    "kern",
-    "palt";
+  font-feature-settings: "kern", "palt";
   line-height: 1.7;
   letter-spacing: 0;
   text-decoration: none;
@@ -763,9 +759,7 @@ blockquote.callout .callout-title-inner > p {
   font-size: 18px;
   font-weight: 500;
   font-kerning: normal;
-  font-feature-settings:
-    "kern",
-    "palt";
+  font-feature-settings: "kern", "palt";
   line-height: 1.7;
   letter-spacing: 0;
 }

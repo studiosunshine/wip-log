@@ -48,8 +48,12 @@ const RecordMonthPager: QuartzComponent = ({ fileData, allFiles }: QuartzCompone
 
   if (!previousMonth && !nextMonth) return null
 
-  const previousHref = previousMonth ? resolveRelative(fileData.slug, previousMonth.page.slug! as FullSlug) : undefined
-  const nextHref = nextMonth ? resolveRelative(fileData.slug, nextMonth.page.slug! as FullSlug) : undefined
+  const previousHref = previousMonth
+    ? resolveRelative(fileData.slug, previousMonth.page.slug! as FullSlug)
+    : undefined
+  const nextHref = nextMonth
+    ? resolveRelative(fileData.slug, nextMonth.page.slug! as FullSlug)
+    : undefined
 
   return (
     <nav class="record-edge-nav" aria-label="월별 기록 이동">

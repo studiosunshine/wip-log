@@ -23,14 +23,17 @@ function parseDateKey(value: unknown): string | undefined {
 }
 
 function getRecordDateKey(page: QuartzPluginData): string | undefined {
-  return parseDateKey(page.frontmatter?.date) ?? parseDateKey(page.slug) ?? parseDateKey(page.filePath)
+  return (
+    parseDateKey(page.frontmatter?.date) ?? parseDateKey(page.slug) ?? parseDateKey(page.filePath)
+  )
 }
 
 function getLatestRecord(allFiles: QuartzPluginData[]): RecordEntry | undefined {
   return allFiles
     .map((page) => {
       const dateKey = getRecordDateKey(page)
-      if (!dateKey || !page.slug || page.slug === "index" || page.slug === "studio-sunshine") return undefined
+      if (!dateKey || !page.slug || page.slug === "index" || page.slug === "studio-sunshine")
+        return undefined
       return { dateKey, page }
     })
     .filter((entry): entry is RecordEntry => Boolean(entry))
@@ -48,7 +51,9 @@ const LatestRecordBackLink: QuartzComponent = ({ fileData, allFiles }: QuartzCom
   return (
     <p class="record-about-back">
       <a href={href} data-record-back-to-log>
-        <span class="record-about-back-mark" aria-hidden="true">&lt;</span>
+        <span class="record-about-back-mark" aria-hidden="true">
+          &lt;
+        </span>
         <span class="record-about-back-text">back to log</span>
       </a>
     </p>
