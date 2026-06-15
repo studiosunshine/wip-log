@@ -30,6 +30,36 @@ interface RenderComponents {
 }
 
 const headerRegex = new RegExp(/h[1-6]/)
+const webOptimizableImageExtensions = new Set(["jpg", "jpeg", "png"])
+type HastPropertyValue = NonNullable<Element["properties"]>[string]
+
+function rewriteWebOptimizedImageUrl(value: HastPropertyValue): HastPropertyValue {
+  if (typeof value !== "string") return value
+  if (/^(?:[a-z][a-z0-9+.-]*:|#|\/\/)/i.test(value)) return value
+
+  const match = value.match(/^(.*)\.([^.?#/]+)([?#].*)?$/)
+  if (!match || !webOptimizableImageExtensions.has(match[2].toLowerCase())) return value
+
+  return `${match[1]}.webp${match[3] ?? ""}`
+}
+
+function rewriteWebOptimizedImageReferences(root: Root) {
+  function walk(node: Root | Element) {
+    for (const child of node.children ?? []) {
+      if (child.type !== "element") continue
+
+      if (child.properties) {
+        child.properties.src = rewriteWebOptimizedImageUrl(child.properties.src)
+        child.properties.href = rewriteWebOptimizedImageUrl(child.properties.href)
+      }
+
+      walk(child)
+    }
+  }
+
+  walk(root)
+}
+
 export function pageResources(
   baseDir: FullSlug | RelativeURL,
   staticResources: StaticResources,
@@ -317,6 +347,7 @@ export function renderPage(
       transform(root, slug, componentData)
     }
   }
+  rewriteWebOptimizedImageReferences(root)
 
   // set componentData.tree to the edited html that has transclusions rendered
   componentData.tree = root

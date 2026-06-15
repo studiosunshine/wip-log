@@ -9,9 +9,11 @@
   --record-accent: #9f4d38;
   --record-measure: 520px;
   --record-selection: rgba(122, 38, 48, 0.24);
-  --record-title-serif: "Noto Serif CJK KR", "Source Han Serif K", "Source Han Serif KR", "Noto Serif KR",
+  --record-title-serif:
+    "Noto Serif CJK KR", "Source Han Serif K", "Source Han Serif KR", "Noto Serif KR",
     "AppleMyungjo", "New York", Georgia, serif;
-  --record-body-serif: "Noto Serif CJK KR", "Source Han Serif K", "Source Han Serif KR", "Noto Serif KR",
+  --record-body-serif:
+    "Noto Serif CJK KR", "Source Han Serif K", "Source Han Serif KR", "Noto Serif KR",
     "AppleMyungjo", Georgia, serif;
   --record-serif: var(--record-title-serif);
   --record-sans: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
@@ -154,6 +156,10 @@ article li {
   text-align-last: left;
 }
 
+article img {
+  border-radius: 8px;
+}
+
 article a {
   color: var(--record-ink);
   background: transparent !important;
@@ -242,7 +248,13 @@ hr {
   height: 1px;
   margin: 72px auto 48px;
   border: 0;
-  background: linear-gradient(90deg, transparent, var(--record-line) 18%, var(--record-line) 82%, transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--record-line) 18%,
+    var(--record-line) 82%,
+    transparent
+  );
 }
 
 .page-footer {
@@ -369,7 +381,10 @@ hr {
   font-size: 0;
   line-height: 1;
   text-decoration: none;
-  transition: color 160ms ease, opacity 160ms ease, transform 160ms ease;
+  transition:
+    color 160ms ease,
+    opacity 160ms ease,
+    transform 160ms ease;
   pointer-events: auto;
 }
 
@@ -450,7 +465,10 @@ a.record-edge-nav-link:focus-visible {
   font-size: 0;
   line-height: 1;
   text-decoration: none;
-  transition: color 160ms ease, opacity 160ms ease, transform 160ms ease;
+  transition:
+    color 160ms ease,
+    opacity 160ms ease,
+    transform 160ms ease;
 }
 
 .record-calendar-month-link::after {

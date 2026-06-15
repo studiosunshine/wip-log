@@ -2,9 +2,14 @@ import { FilePath, joinSegments, slugifyFilePath } from "../../util/path"
 import { QuartzEmitterPlugin, QuartzPageTypePluginInstance } from "../types"
 import path from "path"
 import fs from "fs"
+import sharp from "sharp"
 import { glob } from "../../util/glob"
 import { Argv, BuildCtx } from "../../util/ctx"
 import { QuartzConfig } from "../../cfg"
+
+const webOptimizableImageExtensions = new Set([".jpg", ".jpeg", ".png"])
+const optimizedImageMaxWidth = 1200
+const optimizedImageQuality = 74
 
 function getPageTypeExtensions(ctx: BuildCtx): Set<string> {
   const extensions = new Set<string>()
@@ -30,14 +35,35 @@ const filesToCopy = async (argv: Argv, cfg: QuartzConfig, excludeExtensions: Set
 const copyFile = async (argv: Argv, fp: FilePath) => {
   const src = joinSegments(argv.directory, fp) as FilePath
 
-  const name = slugifyFilePath(fp)
+  const name = outputFilePath(fp)
   const dest = joinSegments(argv.output, name) as FilePath
 
   const dir = path.dirname(dest) as FilePath
   await fs.promises.mkdir(dir, { recursive: true })
 
+  if (isWebOptimizableImage(fp)) {
+    await sharp(src)
+      .rotate()
+      .resize({ width: optimizedImageMaxWidth, withoutEnlargement: true })
+      .webp({ quality: optimizedImageQuality, effort: 5 })
+      .toFile(dest)
+    return dest
+  }
+
   await fs.promises.copyFile(src, dest)
   return dest
+}
+
+function isWebOptimizableImage(fp: FilePath | string): boolean {
+  return webOptimizableImageExtensions.has(path.extname(fp).toLowerCase())
+}
+
+function outputFilePath(fp: FilePath): FilePath {
+  const name = slugifyFilePath(fp) as unknown as FilePath
+  if (!isWebOptimizableImage(name)) return name
+
+  const ext = path.extname(name)
+  return `${name.slice(0, -ext.length)}.webp` as FilePath
 }
 
 export const Assets: QuartzEmitterPlugin = () => {
@@ -59,7 +85,7 @@ export const Assets: QuartzEmitterPlugin = () => {
         if (changeEvent.type === "add" || changeEvent.type === "change") {
           yield copyFile(ctx.argv, changeEvent.path)
         } else if (changeEvent.type === "delete") {
-          const name = slugifyFilePath(changeEvent.path)
+          const name = outputFilePath(changeEvent.path)
           const dest = joinSegments(ctx.argv.output, name) as FilePath
           await fs.promises.unlink(dest)
         }
