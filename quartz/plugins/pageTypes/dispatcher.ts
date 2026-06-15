@@ -66,6 +66,36 @@ interface DispatcherOptions {
   byPageType: Record<string, Partial<FullPageLayout>>
 }
 
+function parseRecordDateKey(value: unknown): string | undefined {
+  if (value instanceof Date && !Number.isNaN(value.getTime())) {
+    return `${value.getUTCFullYear()}-${String(value.getUTCMonth() + 1).padStart(2, "0")}-${String(
+      value.getUTCDate(),
+    ).padStart(2, "0")}`
+  }
+
+  if (typeof value !== "string") return undefined
+
+  const match = value.match(/^(\d{4})-(\d{2})-(\d{2})/)
+  if (!match) return undefined
+
+  return `${match[1]}-${match[2]}-${match[3]}`
+}
+
+function getRecordDateKey(fileData: ProcessedContent[1]["data"]): string | undefined {
+  return (
+    parseRecordDateKey(fileData.frontmatter?.date) ??
+    parseRecordDateKey(fileData.slug) ??
+    parseRecordDateKey(fileData.filePath)
+  )
+}
+
+function findLatestRecordContent(content: ProcessedContent[]): ProcessedContent | undefined {
+  return content
+    .map((entry) => ({ entry, dateKey: getRecordDateKey(entry[1].data) }))
+    .filter(({ entry, dateKey }) => Boolean(dateKey && entry[1].data.slug !== "index"))
+    .sort((a, b) => b.dateKey!.localeCompare(a.dateKey!))[0]?.entry
+}
+
 async function emitPage(
   ctx: BuildCtx,
   slug: FullSlug,
@@ -209,16 +239,19 @@ export const PageTypeDispatcher: QuartzEmitterPlugin<Partial<DispatcherOptions>>
       populateVirtualPageHtmlAst(virtualEntries, ctx, allFilesWithVirtual, resources)
 
       // Phase 2: Emit regular pages (with virtual page data available for transclusion)
+      const latestRecordContent = findLatestRecordContent(content)
       for (const [tree, file] of content) {
         const slug = file.data.slug!
-        const fileData = file.data
+        const [renderTree, renderFile] =
+          slug === "index" && latestRecordContent ? latestRecordContent : [tree, file]
+        const fileData = renderFile.data
         for (const pt of pageTypes) {
           if (pt.match({ slug, fileData, cfg })) {
             const layout = resolveLayout(pt, defaults, byPageType)
             yield emitPage(
               ctx,
               slug,
-              tree,
+              renderTree,
               fileData,
               allFilesWithVirtual,
               layout,
@@ -298,18 +331,25 @@ export const PageTypeDispatcher: QuartzEmitterPlugin<Partial<DispatcherOptions>>
       populateVirtualPageHtmlAst(virtualEntries, ctx, allFilesWithVirtual, resources)
 
       // Phase 2: Emit changed regular pages
+      const latestRecordContent = findLatestRecordContent(content)
+      if ([...changedSlugs].some((slug) => slug !== "index" && parseRecordDateKey(slug))) {
+        changedSlugs.add("index")
+      }
+
       for (const [tree, file] of content) {
         const slug = file.data.slug!
         if (!changedSlugs.has(slug)) continue
 
-        const fileData = file.data
+        const [renderTree, renderFile] =
+          slug === "index" && latestRecordContent ? latestRecordContent : [tree, file]
+        const fileData = renderFile.data
         for (const pt of pageTypes) {
           if (pt.match({ slug, fileData, cfg })) {
             const layout = resolveLayout(pt, defaults, byPageType)
             yield emitPage(
               ctx,
               slug,
-              tree,
+              renderTree,
               fileData,
               allFilesWithVirtual,
               layout,
