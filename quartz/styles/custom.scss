@@ -907,7 +907,9 @@ pre {
   article {
     font-size: 17.5px;
     line-height: 1.8;
+    line-break: anywhere;
     overflow-wrap: anywhere;
+    text-wrap: wrap;
     word-break: break-all;
   }
 
@@ -915,6 +917,10 @@ pre {
   article li {
     font-size: 17.5px;
     line-height: 1.8;
+    line-break: anywhere;
+    overflow-wrap: anywhere;
+    text-wrap: wrap;
+    word-break: break-all;
   }
 
   article p {
