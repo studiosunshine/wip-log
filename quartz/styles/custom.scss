@@ -907,6 +907,8 @@ pre {
   article {
     font-size: 17.5px;
     line-height: 1.8;
+    overflow-wrap: anywhere;
+    word-break: break-all;
   }
 
   article p,
