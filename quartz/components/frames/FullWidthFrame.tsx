@@ -39,6 +39,7 @@ export const FullWidthFrame: PageFrame = {
     const isIndex = componentData.fileData.slug === "index"
     const isAbout = componentData.fileData.slug === "studio-sunshine"
     const currentSlug = componentData.fileData.slug
+    const isRecordMonth = Boolean(currentSlug?.match(/^\d{4}-\d{2}$/))
     const aboutBaseHref = currentSlug
       ? resolveRelative(currentSlug, "studio-sunshine" as FullSlug)
       : "./studio-sunshine"
@@ -58,7 +59,7 @@ export const FullWidthFrame: PageFrame = {
           </>
         ) : (
           <>
-            <div class="center full-width">
+            <div class={`center full-width${isRecordMonth ? " is-record-month" : ""}`}>
               <div class="page-header">
                 <Header {...componentData}>
                   {header.map((HeaderComponent) => (
@@ -82,13 +83,17 @@ export const FullWidthFrame: PageFrame = {
                 <Content {...componentData} />
                 <RecordMonthIndex {...componentData} />
                 <LatestRecordBackLink {...componentData} />
-                <hr />
-                <div class="page-footer">
-                  <RecordCalendar {...componentData} />
-                  {afterBody.map((BodyComponent) => (
-                    <BodyComponent {...componentData} />
-                  ))}
-                </div>
+                {!isRecordMonth && (
+                  <>
+                    <hr />
+                    <div class="page-footer">
+                      <RecordCalendar {...componentData} />
+                      {afterBody.map((BodyComponent) => (
+                        <BodyComponent {...componentData} />
+                      ))}
+                    </div>
+                  </>
+                )}
                 <p class="record-copyright">
                   ⓒ 2026{" "}
                   <a href={aboutHref} data-record-about-link>
