@@ -86,6 +86,20 @@ function addGlobalPageResources(ctx: BuildCtx, componentResources: ComponentReso
   componentResources.afterDOMLoaded.push(`
     const recordBackStorageKey = "record:last-log-page";
 
+    function safeSessionGet(key) {
+      try {
+        return window.sessionStorage.getItem(key);
+      } catch {
+        return undefined;
+      }
+    }
+
+    function safeSessionSet(key, value) {
+      try {
+        window.sessionStorage.setItem(key, value);
+      } catch {}
+    }
+
     function recordPathFromUrl(value) {
       if (!value) return undefined;
 
@@ -103,7 +117,7 @@ function addGlobalPageResources(ctx: BuildCtx, componentResources: ComponentReso
       const path = window.location.pathname + window.location.search + window.location.hash;
       if (window.location.pathname.endsWith("/studio-sunshine")) return;
       if (window.location.pathname.endsWith("/studio-sunshine/")) return;
-      sessionStorage.setItem(recordBackStorageKey, path);
+      safeSessionSet(recordBackStorageKey, path);
     }
 
     document.addEventListener(
@@ -119,7 +133,7 @@ function addGlobalPageResources(ctx: BuildCtx, componentResources: ComponentReso
 
         if (target.matches("[data-record-back-to-log]")) {
           const params = new URLSearchParams(window.location.search);
-          const storedPath = sessionStorage.getItem(recordBackStorageKey);
+          const storedPath = safeSessionGet(recordBackStorageKey);
           const targetPath =
             recordPathFromUrl(params.get("from")) ??
             recordPathFromUrl(storedPath) ??

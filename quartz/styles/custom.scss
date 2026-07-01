@@ -842,6 +842,21 @@ pre {
   background: rgba(244, 239, 228, 0.52);
 }
 
+@media (min-width: 901px) and (max-width: 1180px) {
+  :root {
+    --record-measure: 640px;
+  }
+
+  .page,
+  .page[data-frame="full-width"] {
+    max-width: 940px;
+  }
+
+  #quartz-root.page {
+    max-width: 940px !important;
+  }
+}
+
 @media (min-width: 561px) and (max-width: 900px) {
   .page-header {
     width: 100%;
