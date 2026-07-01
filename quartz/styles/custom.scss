@@ -842,12 +842,6 @@ pre {
   background: rgba(244, 239, 228, 0.52);
 }
 
-@media (hover: none) and (pointer: coarse) and (min-width: 901px) and (max-width: 1400px) {
-  :root {
-    --record-measure: clamp(600px, 46vw, 640px);
-  }
-}
-
 @media (min-width: 561px) and (max-width: 900px) {
   .page-header {
     width: 100%;
