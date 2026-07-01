@@ -842,18 +842,18 @@ pre {
   background: rgba(244, 239, 228, 0.52);
 }
 
-@media (min-width: 901px) and (max-width: 1400px) {
+@media (hover: none) and (pointer: coarse) and (min-width: 901px) and (max-width: 1400px) {
   :root {
-    --record-measure: clamp(640px, 52vw, 720px);
+    --record-measure: clamp(640px, 52vw, 700px);
   }
 
   .page,
   .page[data-frame="full-width"] {
-    max-width: 1040px;
+    max-width: 980px;
   }
 
   #quartz-root.page {
-    max-width: 1040px !important;
+    max-width: 980px !important;
   }
 }
 
