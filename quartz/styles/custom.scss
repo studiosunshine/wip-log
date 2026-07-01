@@ -844,16 +844,7 @@ pre {
 
 @media (hover: none) and (pointer: coarse) and (min-width: 901px) and (max-width: 1400px) {
   :root {
-    --record-measure: clamp(640px, 52vw, 700px);
-  }
-
-  .page,
-  .page[data-frame="full-width"] {
-    max-width: 980px;
-  }
-
-  #quartz-root.page {
-    max-width: 980px !important;
+    --record-measure: clamp(600px, 46vw, 640px);
   }
 }
 
