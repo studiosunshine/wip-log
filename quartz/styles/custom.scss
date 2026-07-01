@@ -34,7 +34,7 @@ body,
   background: var(--record-paper);
   color: var(--record-ink);
   font-family: var(--record-sans);
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: 0;
 }
 
@@ -64,7 +64,7 @@ body {
 a {
   color: var(--record-accent);
   background: transparent;
-  font-weight: 300;
+  font-weight: 400;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.22em;
 }
@@ -200,7 +200,7 @@ article h3,
 .page-title {
   color: var(--record-ink);
   font-family: var(--record-title-sans);
-  font-weight: 500;
+  font-weight: 400;
   font-kerning: normal;
   font-feature-settings: "kern", "palt";
   letter-spacing: 0;
@@ -240,7 +240,7 @@ article h1,
   color: var(--record-muted);
   font-family: var(--record-sans);
   font-size: 13px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.7;
   text-align: center;
 }
@@ -310,7 +310,7 @@ hr {
   color: var(--record-muted);
   font-family: var(--record-sans);
   font-size: 12px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.6;
   text-align: center;
 }
@@ -340,7 +340,7 @@ hr {
   margin: 26px auto -18px;
   font-family: var(--record-sans);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.6;
   text-align: right;
 }
@@ -351,7 +351,7 @@ hr {
   border-radius: 0 !important;
   box-shadow: none !important;
   padding: 0 !important;
-  font-weight: 300;
+  font-weight: 400;
   text-decoration: none;
   transition: color 160ms ease;
 }
@@ -393,7 +393,7 @@ hr {
   margin: 0 0 18px;
   color: var(--record-muted);
   font-size: 17px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.8;
 }
 
@@ -581,7 +581,7 @@ a.record-calendar-month-link:focus-visible {
   margin: 0 0 8px;
   color: var(--record-muted);
   font-size: 12px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1;
   text-transform: uppercase;
 }
@@ -598,7 +598,7 @@ a.record-calendar-month-link:focus-visible {
   background: transparent;
   color: var(--record-ink);
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1;
   text-decoration: none;
   transition: color 160ms ease;
@@ -677,7 +677,7 @@ a.record-calendar-day:focus-visible {
   color: var(--record-muted);
   font-family: var(--record-sans);
   font-size: 13px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.7;
 }
 
@@ -689,7 +689,7 @@ a.record-calendar-day:focus-visible {
   padding: 0 !important;
   font-family: var(--record-title-sans);
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
   font-kerning: normal;
   font-feature-settings: "kern", "palt";
   line-height: 1.7;
@@ -773,7 +773,7 @@ blockquote.callout .callout-title-inner > p {
   color: var(--record-ink);
   font-family: var(--record-title-sans);
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 400;
   font-kerning: normal;
   font-feature-settings: "kern", "palt";
   line-height: 1.7;
