@@ -13,6 +13,7 @@ title: Work in Progress Log.
 > [!Publisher]
 >
 > - [방해리](https://litt.ly/hreecord)
->   - 회사 밖 1인 생활자
+>   - 회사 밖 생활자
+>   - 1인 기업 프리랜서
 >   - 7년 차 B2B 콘텐츠 에디터
 >   - 크래프터(Crafter)
